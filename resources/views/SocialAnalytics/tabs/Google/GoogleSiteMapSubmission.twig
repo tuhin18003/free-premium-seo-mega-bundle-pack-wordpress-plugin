@@ -1,0 +1,71 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        <div class="row">
+                        <div id="sitemap_submission" class="col-lg-12">
+                        <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title font-13">
+                                    {{panel_subtitle}}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if aios_goo_app_token.auth_status is empty %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                      <strong><i class="fa fa-warning"></i> </strong> {{aios_goo_app_token.auth_error_msg|raw}}
+                                    </div>
+                                {% endif %}
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_website_url}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="website_url" id="website_url" readonly value="{{CommonText.site_url}}" placeholder ="{{placeholder_website_url}}" required=""/>
+                                        <p class="description">{{des_website_url}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{label_feed_path}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="feed_path" id="feed_path" placeholder ="{{placeholder_feed_path}}" required=""/>
+                                        <p class="description">{{des_feed_path}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                <button class="btn btn-purple waves-effect waves-light btn-submit" {% if aios_goo_app_token.auth_status is empty %}disabled{% endif%} type="submit">{{label_submit_btn}}</button>
+                            </div>
+                        </div>
+                            </form>
+                        </div>
+                            
+                        </div>
+                        
+                          
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

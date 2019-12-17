@@ -1,0 +1,127 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-light m-b-20">
+                                                <div class="row m-b-20">
+                                                    <div class="col-lg-6">
+                                                        <h4 class="header-title"><b>
+                                                            {{date_range_title}}
+                                                        </b></h4>
+                                                        <p>{{date_range_subtitle}}</p>
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <div class="btn-group vertical-middle" data-toggle="buttons">
+                                                            <div id="reportrange" class="form-control">
+                                                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if data_items == '' %}
+                                            <div class="alert alert-warning"><i class="fa fa-warning"></i> {{no_data_found}}</div>
+                                        {% else  %}
+                                        
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-inverse m-b-20">
+                                                <h4 class="header-title text-white"><b>
+                                                        {{site_ranking_trust_title}}
+                                                    </b></h4>
+                                                <p class="text-muted font-13">
+                                                    {{site_ranking_trust_subtitle}}
+                                                </p>
+                                            </div>
+                                            <div id="website_ranking_trust_graph" class=" m-b-10"></div>
+                                        </div>
+                                                
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-inverse m-b-20">
+                                                <h4 class="header-title text-white"><b>
+                                                        {{site_auth_trust_title}}
+                                                    </b></h4>
+                                                <p class="text-muted font-13">
+                                                    {{site_auth_trust_subtitle}}
+                                                </p>
+                                            </div>
+                                            <div id="website_domain_auth_graph" class=" m-b-10"></div>
+                                        </div>
+                                                
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-inverse m-b-20">
+                                                <h4 class="header-title text-white"><b>
+                                                        {{site_trust_title}}
+                                                    </b></h4>
+                                                <p class="text-muted font-13">
+                                                    {{site_trust_subtitle}}
+                                                </p>
+                                            </div>
+                                            <div id="website_trust_graph" class=" m-b-10"></div>
+                                        </div>
+                                                
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-inverse m-b-20">
+                                                <h4 class="header-title text-white"><b>
+                                                        {{site_spam_title}}
+                                                    </b></h4>
+                                                <p class="text-muted font-13">
+                                                    {{site_spam_subtitle}}
+                                                </p>
+                                            </div>
+                                            <div id="website_spam_graph" class=" m-b-10"></div>
+                                        </div>
+                                                
+                                        <div class="site-ranking-trust m-b-20">
+                                            <div class="p-10 bg-inverse m-b-20">
+                                                <h4 class="header-title text-white"><b>
+                                                        {{site_backlink_title}}
+                                                    </b></h4>
+                                                <p class="text-muted font-13">
+                                                    {{site_backlink_subtitle}}
+                                                </p>
+                                            </div>
+                                            <div id="website_backlinks_graph" class=" m-b-10"></div>
+                                        </div>
+                                        {% endif  %}
+                                        <a href="{{back_btn_link}}" class="btn btn-purple"><i class="fa fa-angle-double-left"></i> {{back_btn_label}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

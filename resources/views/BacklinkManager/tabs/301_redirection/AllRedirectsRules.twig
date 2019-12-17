@@ -1,0 +1,132 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                                <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        {% if filter_title != '' %}
+                                        <div class="p-10 bg-inverse m-b-20">
+                                            <h4 class="header-title text-white"><b>
+                                                    {{filter_title|raw}}
+                                                </b></h4>
+                                            <p class="text-muted font-13">
+                                                {{filter_subtitle|raw}}
+                                            </p>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        <div class="button-list btn-group" id="demo-delete-row">
+                                            <div class="btn-group" >
+                                                <button type="button" class="btn btn-white dropdown-toggle waves-effect " data-toggle="dropdown" aria-expanded="false">{{filter_actn_btns}} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu" >
+                                                    {% for group,items in redirect_group %}
+                                                        {#<optgroup label="{{group}}">#}
+                                                            {% for item in items %}
+                                                                <li><a href="{{current_url}}&filter_group={{loop.index}}" >{{item}}</a></li>
+                                                            {% endfor %}
+{#                                                        </optgroup>#}
+                                                    {% endfor %}
+                                                        
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group" >
+                                                <button type="button" class="btn btn-warning dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">{{actn_btns}} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a id="make_active">{{actn_btn_active}}</a></li>
+                                                    <li><a id="make_inactive">{{actn_btn_inactive}}</a></li>
+                                                    <li><a id="reset_hits">{{actn_btn_reset_hits}}</a></li>
+                                                </ul>
+                                            </div>
+                                            <button id="btn_delete" data-type="redirects_rules" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                        </div>
+                                        <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                                data-show-columns="true" data-sort-name="id"
+                                               data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                            <thead>
+                                                <tr >
+                                                    <th data-field="state" data-checkbox="true"></th>
+                                                    {% for col_name in tbl_headers %}
+                                                        <th data-field="{{ col_name }}" data-sortable="true" >{{ col_name }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in tbl_data_array %}
+                                                    <tr id="item_id_{{data.id|e}}" class="{% if data.status|e == 'disabled' %}disabled-row {% endif %}" >
+                                                        <td><input  type="checkbox" value="{{data.id|e}}"/></td>
+                                                        <td>
+                                                            <input type="hidden" value="{{data.id|e}}" class="item_id"/>
+                                                            {% if data.action_code|e == 0 %}
+                                                                {{ data.action_type|e  }}
+                                                            {% else %}
+                                                                {{ data.action_code|e  }}
+                                                            {% endif %}
+                                                            <div class="row-actions">
+                                                                <span class="edit">
+                                                                    <a href="{{edit_url}}&rule_id={{data.id|e}}">{{label_span_edit}}</a>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            {{data.url}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.action_data}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.last_count}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.status}}
+                                                        </td>
+                                                        <td>
+                                                            {% if data.last_access is defined %}
+                                                                {{data.last_access|date("M d, Y h:i A")}}
+                                                            {% else %}
+                                                                {{ data.last_access }}
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                        </table>
+                                        {% if filter_title != '' %}
+                                            <br><br>
+                                            <a href="{{current_url}}" class="btn btn-primary" ><i class="fa fa-angle-double-left"></i> {{label_back_to_btn}}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

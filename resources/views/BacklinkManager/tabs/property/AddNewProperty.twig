@@ -1,0 +1,140 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form id="formAddNewProperty" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title font-13">
+                                                {{panel_subtitle}}
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group form-group-border">
+                                                <label class="col-sm-3 control-label">{{label_add_new_property}}</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="url" name="input_new_property" id="input_new_property"  placeholder ="{{placeholder_add_new_property}}" required=""/>
+                                                    <p class="description">{{des_add_new_property}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-group-border">
+                                                <label class="col-sm-3 control-label">{{label_add_new_group}}</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="group" id="group">
+                                                        <option value="0">==============={{select_group}}===============</option>
+                                                        <option value="new">{{select_create_new_group}}</option>
+                                                        {% for group in groups %}
+                                                            <option value="{{group.id}}">{{group.group_name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <p class="description">{{des_add_new_group}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                
+                                    
+                                    
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                {#<h4 class="m-t-0 header-title">Add a website</h4>#}
+                                                <p class="text-muted m-b-30 font-13">{{panel_subtitle}}</p>
+                                                <form role='form' method='post' action="{{form_action}}" id="formAddNewProperty">
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_add_new_property}}</label>
+                                                        <input class="form-control" type="url" name="input_new_property" id="input_new_property" placeholder ="{{placeholder_add_new_property}}" required=""/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="group">{{label_add_new_group}}</label>
+                                                        <select class="form-control" name="group" id="group">
+                                                            <option value="0">==============={{select_group}}===============</option>
+                                                            <option value="new">{{select_create_new_group}}</option>
+                                                            {% for group in groups %}
+                                                                <option value="{{group.id}}">{{group.group_name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div id="title-wrap" class="form-group m-b-15 create_new_group_field">
+                                                        <input class="form-control" name="new_group_name"  id="new_group_name" autocomplete="off" type="text" placeholder="{{placeholder_add_new_group}}">
+                                                    </div>
+                                                    {#<div class="form-group">
+                                                        <div class="checkbox checkbox-custom">
+                                                            <input id="checkbox11" type="checkbox" name="auto_find_backlinks">
+                                                            <label for="checkbox11">{{label_automatic_backlink}}</label>
+                                                        </div>
+                                                    </div>#}
+                                                    <div class="form-group">
+                                                        <div class="checkbox checkbox-custom">
+                                                            <input id="checkbox12" type="checkbox" name="auto_update_status">
+                                                            <label for="checkbox11">{{label_automatic_update}}</label>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                    <br>
+                                                    <br>
+                                                    <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                                    <input type="hidden" name="action" id="action" value="Property_add"/>
+                                                    <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit"> {{label_submit_btn}} <i class="fa fa-angle-double-right"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-5 col-lg-offset-1">
+                                                <div class="panel-group" id="accordion-test-2">
+                                                    <div class="panel panel-default faq-panel">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
+                                                                    {{faq_title}}
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne-2" class="panel-collapse collapse">
+                                                            <div class="panel-body">
+                                                                <ul>
+                                                                    {% for ques,ans in faq_ques_ans%}
+                                                                        <li>
+                                                                            {{ques}}
+                                                                            <ul>
+                                                                                <li>{{ans}}</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

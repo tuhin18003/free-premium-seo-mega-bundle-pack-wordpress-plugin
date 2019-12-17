@@ -1,0 +1,113 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                {#<h4 class="m-t-0 header-title">Add a website</h4>#}
+                                                <p class="text-muted m-b-30 font-13">{{panel_subtitle}}</p>
+                                                <form id="FormRedirectionOptions" action="{{form_action}}" role='form' method='post'>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_redirect_logs}}</label>
+                                                        <select class="form-control" name="expire_redirect" id="expire_redirect">
+                                                            {% for value, name in select_expire %}
+                                                                <option value="{{value}}" {% if get_options.expire_redirect == value %} selected="selected" {% endif %} >{{name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <p class="help_block">{{placeholder_redirect_logs}}</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_404_logs}}</label>
+                                                        <select class="form-control" name="expire_404" id="expire_404">
+                                                            {% for value, name in select_expire %}
+                                                                <option value="{{value}}" {% if get_options.expire_404 == value %} selected="selected" {% endif %} >{{name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_monitor_posts}}</label>
+                                                        <select class="form-control" name="monitor_post" id="monitor_post">
+                                                            <option value="0" >{{placeholder_monitor_posts}}</option>
+                                                            {% for group,items in select_group %}
+                                                                <optgroup label="{{group}}">
+                                                                    {% for item in items %}
+                                                                        <option value="{{loop.index}}" {% if loop.index == get_options.monitor_post %} selected ="selected" {% endif %}>{{item}}</option>
+                                                                    {% endfor %}
+                                                                </optgroup>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <br>
+                                                        <br>
+                                                        <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                                        <input type="hidden" name="action" value="CSaddRedirectionOptoins"/>
+                                                        <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                                    <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}} <i class="fa fa-angle-double-right"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-5 col-lg-offset-1">
+                                                <div class="panel-group" id="accordion-test-2">
+                                                    <div class="panel panel-default faq-panel">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
+                                                                    {{faq_title}}
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne-2" class="panel-collapse collapse">
+                                                            <div class="panel-body">
+                                                                <ul>
+                                                                    {% for ques,ans in faq_ques_ans%}
+                                                                        <li>
+                                                                            {{ques}}
+                                                                            <ul>
+                                                                                <li>{{ans}}</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

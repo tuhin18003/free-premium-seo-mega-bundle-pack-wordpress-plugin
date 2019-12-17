@@ -1,0 +1,21 @@
+{
+  "name": "getherbert/herbert-plugin",
+  "description": "Herbert plugin",
+  "license": "MIT",
+  "require": {
+    "php" : ">=5.5.0",
+    "getherbert/framework": "~0.9",
+    "guzzlehttp/guzzle" : "^6.0",
+    "facebook/graph-sdk" : "^5.4",
+    "google/apiclient" : "^2.0"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "CsSeoMegaBundlePack\\": "app/"
+    }
+  }
+}

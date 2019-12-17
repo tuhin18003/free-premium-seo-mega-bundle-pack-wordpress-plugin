@@ -1,0 +1,64 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        <div class="row">
+                        <div id="site_verification" class="col-lg-12">
+                        <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title font-13">
+                                    {{panel_site_subtitle}}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if notificatoin is not empty %}
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                      <strong><i class="fa fa-check"></i> </strong> {{notificatoin|raw}}
+                                    </div>
+                                {% endif %}
+                                
+                                {% include '@CsSeoMegaBundlePack/Global/includes/hints.twig' %} 
+                                
+                                <div class="form-group {% if verify_meta_tag is not empty %}form-group-border {% endif %}">
+                                    <label class="col-sm-3 control-label">{{label_meta_tag}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="meta_tag" id="meta_tag" value="{{verify_meta_tag}}" placeholder ="{{placeholder_meta_tag}}" required=""/>
+                                        <p class="description">{{des_meta_tag_1}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit" >{{label_submit_btn}}</button>
+                            </div>
+                        </div>
+                            </form>
+                        </div>
+                        </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

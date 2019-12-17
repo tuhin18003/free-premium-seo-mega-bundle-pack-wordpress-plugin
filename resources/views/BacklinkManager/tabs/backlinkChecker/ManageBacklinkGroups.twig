@@ -1,0 +1,115 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                                <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card-box">
+                                        
+                                        <div class="button-list btn-group" id="demo-delete-row">
+                                            <button id="btn_delete" data-type="delete_cat" data-action="CSdeleteBacklink" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                        </div>
+                                        <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                                data-show-columns="true" data-sort-name="id"
+                                               data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="state" data-checkbox="true"></th>
+                                                    {% for col_name in tbl_headers %}
+                                                        <th data-field="{{ col_name }}" data-sortable="true" >{{ col_name }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody id="backLinkCatList">
+                                                {% for data in tbl_data_array %}
+                                                    <tr id="item_id_{{data.id}}">
+                                                        <td><input  type="checkbox" value="{{data.id}}"/></td>
+                                                        <td>
+                                                            <input type="hidden" value="{{data.id}}" class="item_id"/>
+                                                            <a href="{{manage_link_url}}&filter_cat={{data.id}}">{{data.group_name}}</a>
+                                                            <div class="row-actions">
+                                                                <span class="edit">
+                                                                    {% if group_edit_id == data.id %}
+                                                                        {{group_edit_lable}}
+                                                                    {% else %}
+                                                                        <a href="{{current_url}}&group_id={{data.id}}&edit=true">{{label_span_edit}}</a>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            {{data.item_count}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.description}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.created_on |date("M d, Y")}}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card-box">
+                                        <h4 class="m-t-0 header-title">{{add_new_group_box_title}}</h4>
+                                        <p></p>
+                                        <form class="m-t-20" id="create_new_cat" name="create_new_cat" method="post" action="">
+                                            <div class="form-group">
+                                                <label for="catname">{{label_add_new_cat_name}}</label>
+                                                <input class="form-control" name="new_cat_name"  id="new_cat_name" value="{{group_edit_data.group_name}}" autocomplete="off" type="text" placeholder="{{placeholder_add_new_category}}" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="catdes">{{label_description}}</label>
+                                                <input class="form-control" name="input_description"  id="input_description" value="{{group_edit_data.group_description}}" autocomplete="off" type="text" placeholder="{{placeholder_description}}">
+                                            </div>
+                                            <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                            <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                            <input type="hidden" name="action" id="action" value="CSaddNewBacklinksCat"/>
+                                            <input type="hidden" name="group_id" id="group_id" value="{{group_edit_data.id}}"/>
+                                            <div class="form-group">
+                                                {% if group_edit_data.id is defined %}
+                                                <a href="{{current_url}}" class="btn btn-warning">{{cancel}}</a>
+                                                {% endif %}
+                                                <button class="btn btn-purple btn-create-blc-cat" type="submit" >{{label_create_new_cat_btn}}</button>
+                                                
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                                
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

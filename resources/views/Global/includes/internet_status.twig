@@ -1,0 +1,11 @@
+{# internet status Twig template #}
+{% if is_inet_down is empty %}
+<div class="alert alert-danger">
+    <p>
+        <strong><i class="fa fa-warning"></i> {{CommonText.notice_inet_down.type}}</strong>
+        <span class="description">
+            {{CommonText.notice_inet_down.msg}}
+        </span>
+    </p>
+</div>
+{% endif %}

@@ -1,0 +1,134 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                {#<h4 class="m-t-0 header-title">Add a website</h4>#}
+                                                <p class="text-muted m-b-30 font-13">{{panel_subtitle}}</p>
+                                                <form id="FormAddNewRedirectionRule" action="{{form_action}}" role='form' method='post'>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_source_url}}*</label>
+                                                        <input class="form-control" type="text" name="source_url" value ="{{edit_item.1}}" id="source_url" placeholder ="{{placeholder_source_url}}" required=""/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_match}}*</label>
+                                                        <select class="form-control" name="match_type" id="match_type">
+                                                            {% for value, name in select_match %}
+                                                                <option value="{{value}}" {% if value == edit_item.2 %} selected ="selected" {% endif %}   >{{name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_action}}*</label>
+                                                        <select class="form-control" name="action_type" id="action_type">
+                                                            {% for value, name in select_action %}
+                                                                <option value="{{value}}" {% if value == edit_item.3 %} selected ="selected" {% endif %} >{{name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="checkbox checkbox-custom">
+                                                            <input id="regex" type="checkbox" name="regex" {% if edit_item.4 != '' %} checked ="checked" {% endif %} >
+                                                            <label for="checkbox11">{{label_user_regular_expression}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_destination_url}}*</label>
+                                                        <input class="form-control" type="text" name="destination_url" value ="{{edit_item.5}}" id="destination_url" placeholder ="{{placeholder_destination_url}}" required=""/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new property">{{label_group}}</label>
+                                                        <select class="form-control" name="group_id" id="group_id">
+                                                            {% for group,items in select_group %}
+                                                                <optgroup label="{{group}}">
+                                                                    {% for item in items %}
+                                                                        <option value="{{loop.index}}" {% if loop.index == edit_item.6 %} selected ="selected" {% endif %}>{{item}}</option>
+                                                                    {% endfor %}
+                                                                </optgroup>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="add new description">{{label_description}}</label>
+                                                        <input class="form-control" type="text" name="description" value ="{{edit_item.7}}" id="description" placeholder ="{{placeholder_description}}" />
+                                                    </div>
+                                                    <br>
+                                                        <br>
+                                                        <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                                        <input type="hidden" id="redirect_after_success" value="{{url_all_redirections}}"/> 
+                                                        <input type="hidden" name="action" value="CSaddNewRedirectionRule"/>
+                                                        <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                                        {% if edit_item.0 != '' %}
+                                                            <input type="hidden" name="rule_id" id="rule_id" value="{{edit_item.0}}"/>
+                                                            <a href="{{url_all_redirections}}" class="btn btn-inverse waves-effect waves-light" ><i class="fa fa-angle-double-left"></i> {{label_back_btn}}</a>
+                                                        {% endif %}
+                                                    <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}} <i class="fa fa-angle-double-right"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-5 col-lg-offset-1">
+                                                <div class="panel-group" id="accordion-test-2">
+                                                    <div class="panel panel-default faq-panel">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
+                                                                    {{faq_title}}
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne-2" class="panel-collapse collapse">
+                                                            <div class="panel-body">
+                                                                <ul>
+                                                                    {% for ques,ans in faq_ques_ans%}
+                                                                        <li>
+                                                                            {{ques}}
+                                                                            <ul>
+                                                                                <li>{{ans}}</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

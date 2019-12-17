@@ -1,0 +1,166 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/BacklinkManager/common/title.twig' %} 
+                        {#page title end#}
+                        
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="general_options" class="card-box">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+{#                                                <p class="text-muted m-b-30 font-13">{{panel_subtitle}}</p><hr>#}
+                                                <form id="FormBacklinkOptions" class="form-horizontal" action="{{form_action}}" role='form' method='post'>
+                                                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                                                        <li class="active">
+                                                            <a href="#section1" data-toggle="tab" aria-expanded="true">
+                                                                <span class="visible-xs"><i class="fa fa-home"></i></span> 
+                                                                <span class="hidden-xs">{{section_1}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#section2" data-toggle="tab" aria-expanded="false">
+                                                                <span class="visible-xs"><i class="fa fa-home"></i></span> 
+                                                                <span class="hidden-xs">{{section_2}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#section3" data-toggle="tab" aria-expanded="false">
+                                                                <span class="visible-xs"><i class="fa fa-home"></i></span> 
+                                                                <span class="hidden-xs">{{section_3}}</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div id="section1" class="tab-pane active">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group m-b-20">
+                                                                        <label class="col-md-5" for="add new property">{{label_where_to_look}}:</label>
+                                                                        <div class="col-md-7">
+                                                                            {% for value, label in where_to_look_options %}
+                                                                            <div class="checkbox checkbox-success">
+                                                                                <input type="checkbox" name="m[{{value}}]" id="m" value="{{value}}" {% if attribute(get_options.module, value) is defined and attribute(get_options.module, value) == value %} checked="checked" {% endif %}>
+                                                                                <label for="radio1">{{label}}</label>
+                                                                            </div>
+                                                                            {% endfor%}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group m-b-20">
+                                                                        <label class="col-md-5" for="add new property">{{label_post_statuses}}:</label>
+                                                                        <div class="col-md-7">
+                                                                            {% for status, status_object in post_statuses_options %}
+                                                                            <div class="checkbox checkbox-success">
+                                                                                <input type="checkbox" name="ps[{{status_object.name}}]" id="ps" value="{{status_object.name}}" {% if attribute(get_options.statuses, status_object.name) is defined and attribute(get_options.statuses, status_object.name) == status_object.name %} checked="checked" {% endif %}>
+                                                                                <label for="radio1">{{status_object.label}}</label>
+                                                                            </div>
+                                                                            {% endfor%}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="section2" class="tab-pane">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group m-b-20">
+                                                                        <label class="col-md-5" for="add new property">{{label_link_types}}:</label>
+                                                                        <div class="col-md-7">
+                                                                            {% for value, label in link_types_options %}
+                                                                            <div class="checkbox checkbox-success">
+                                                                                <input type="checkbox" name="lt[{{value}}]" id="lt" value="{{value}}" {% if attribute(get_options.link_types, value) is defined and attribute(get_options.link_types, value) == value %} checked="checked" {% endif %} />
+                                                                                <label for="radio1">{{label}}</label>
+                                                                            </div>
+                                                                            {% endfor%}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group m-b-20">
+                                                                        <label class="col-md-5" for="add new property">{{label_protocols_apis}}:</label>
+                                                                        <div class="col-md-7">
+                                                                            {% for value, label in protocols_apis_options %}
+                                                                            <div class="checkbox checkbox-success">
+                                                                                <input type="checkbox" name="pa[{{value}}]" id="pa" {% if attribute(get_options.protocols_apis, value) is defined and attribute(get_options.protocols_apis, value) == value %} checked="checked" {% endif %} value="{{value}}" >
+                                                                                <label for="radio1">{{label}}</label>
+                                                                            </div>
+                                                                            {% endfor%}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="section3" class="tab-pane">
+                                                            <div class="form-group m-b-20">
+                                                                <label class="col-md-5" for="add new property">{{label_monitor_schedule}}:</label>
+                                                                <div class="col-md-7">
+                                                                        <select class="form-control" name="cron_schedule" id="cron_schedule">
+                                                                            <option value="0">{{label_select_default}}</option>
+                                                                            <option value="stop">{{label_no_autocheck}}</option>
+                                                                            {% for value, name in select_expire %}
+                                                                                <option value="{{value}}" {% if get_options.cron_schedule == value %} selected="selected" {% endif %} >{{name.display}}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group m-b-20">
+                                                                <label class="col-md-5" for="add new property">{{label_db_sync_schedule}}:</label>
+                                                                <div class="col-md-7">
+                                                                        <select class="form-control" name="cron_schedule_entire_db" id="cron_schedule_entire_db">
+                                                                            <option value="0">{{label_select_default}}</option>
+                                                                            <option value="stop">{{label_no_autocheck}}</option>
+                                                                            {% for value, name in select_expire %}
+                                                                                <option value="{{value}}" {% if get_options.cron_schedule_entire_db == value %} selected="selected" {% endif %} >{{name.display}}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group m-b-20">
+                                                                <label class="col-md-5" for="add new property">{{label_timeout}}:</label>
+                                                                <div class="col-md-7">
+                                                                      <input type="number" class="form-control" name="timeout" value="{{get_options.timeout}}" placeholder="{{placeholder_timeout}}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <br>
+                                                        <br>
+                                                        <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                                        <input type="hidden" name="action" id="action" value="CSGeneralOptoins"/>
+                                                        <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                                    <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}} <i class="fa fa-angle-double-right"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

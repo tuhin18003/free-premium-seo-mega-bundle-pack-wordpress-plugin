@@ -1,0 +1,107 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        
+                        <div class="row">
+                            <div id="backlink_finder_form" class="col-lg-12">
+                                <form role='form' action ="{{form_action}}" id="FindBacklinkMatrix" name="FindBacklinkMatrix" method='post' class="form-horizontal">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title font-13">
+                                            {{panel_title}}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        {% include '@CsSeoMegaBundlePack/Global/includes/hints.twig' %} 
+                                        
+                                        
+                                        {% if properties is empty %}
+                                            <div class="alert alert-warning"><i class="fa fa-warning"></i> {{no_property_found}}</div>
+                                            <a href="{{add_new_property_url}}" class="btn btn-purple"><i class="fa fa-angle-double-left"></i> {{add_new_property_btn}}</a>
+                                        {% else %}
+                                        <div class="form-group form-group-border">
+                                            <label class="col-sm-3 control-label">{{label_backlink_to}}*</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="property_id" id="property_id">
+                                                    {% for backlink in properties %}
+                                                        <option value="{{backlink.p_id}}">{{backlink.item_domain}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <p class="description">{{des_backlink_to}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-border">
+                                            <label class="col-sm-3 control-label">{{label_backlink_from}}*</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" name="backlink_from" id="backlink_from" placeholder ="{{placeholder_add_new_backlink}}" required=""/>
+                                                <p class="description">{{des_backlink_from}}</p>
+                                            </div>
+                                        </div>
+                                         <div class="form-group form-group-border">
+                                            <label class="col-sm-3 control-label">{{label_add_new_category}}</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="group" id="group">
+                                                    <option value="0">==============={{select_group}}===============</option>
+                                                    <option value="new">{{select_create_new_cat}}</option>
+                                                    {% for group in groups %}
+                                                        <option value="{{group.id}}">{{group.group_name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <p class="description">{{des_category}}</p>
+                                            </div>
+                                        </div>
+                                        <div id="title-wrap" class="form-group form-group-border m-b-15 create_new_group_field">
+                                            <label class="col-sm-3 control-label">{{label_new_cat_name}}</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" name="new_group_name"  id="new_group_name" autocomplete="off" type="text" placeholder="{{placeholder_add_new_category}}">
+                                                <p class="description">{{des_new_cat_name}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">&nbsp;</label>
+                                            <div class="col-sm-9">
+                                                <div class="checkbox checkbox-custom">
+                                                    <input id="checkbox11" name="auto_update_status" type="checkbox" >
+                                                    <label for="checkbox11">{{label_automatic_backlink}}</label>
+                                                </div>
+                                                <p class="description">{{des_auto_update_status}}</p>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="panel-footer">
+                                        <input type="hidden" name="action" id="action" value="CSaddNewBacklinks"/>
+                                        <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                        <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}}</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        {#main content end#}
+                        
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

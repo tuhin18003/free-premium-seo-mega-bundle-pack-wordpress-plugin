@@ -1,0 +1,140 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                {% include '@CsSeoMegaBundlePack/Global/includes/internet_status.twig' %} 
+                                                {#<h4 class="m-t-0 header-title">Add a website</h4>#}
+                                                <div class="text-center m-t-40">
+                                                    <div class="form-group">
+                                                        {% for web_name in webs %}
+                                                            {% set check = ''%}
+                                                           {% if loop.index ==1 %} 
+                                                               {% set check = 'checked="checked"'%}
+                                                           {% endif %}
+                                                            <div class="checkbox checkbox-custom checkbox-inline">
+                                                                <input type="checkbox" id="{{loop.index}}" class="type_selection" {{check}} class="type_selection" value="{{web_name|lower}}">
+                                                                <label for="checkbox11">{{web_name}}</label>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div id="searchfield">
+                                                        <input type="text" name="search" id="search" class="biginput" placeholder="{{placeholder_search}}" />
+                                                    </div><!-- @end #searchfield -->
+                                                </div>
+                                                <div class="m-t-30 text-center keyword-button">
+                                                    <button type="button" class="btn btn-purple waves-effect waves-light btn-lg btn-generate-keywords" {% if is_inet_down is empty %} disabled = "disabled" {% endif %} >{{label_btn_gen_keyword}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="beforeResult">&nbsp</div>            
+                                    <div class="m-t-20 portlet">
+                                        <div class="portlet-heading bg-success">
+                                            <h3 class="portlet-title font-13">
+                                                {{kr_panel_title}}
+                                            </h3>
+                                            <div class="portlet-widgets">
+                                                <button class="btn btn-danger btn-sm waves-effect waves-light btn-stop display-none"> 
+                                                    <span class="btn-label">
+                                                        <i class="fa fa-pause"></i>
+                                                    </span>
+                                                    {{label_stop_btn}} 
+                                                </button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="bg-danger" class="panel-collapse collapse in" style="" aria-expanded="true">
+                                            <div class="portlet-body">
+                                                <div class="alert alert-info kr-alert-before-submit"><i class="fa fa-info"></i> {{kr_before_submit}} </div>
+                                                <form id="saveKeywordSuggestion" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                                                <div class="row KeySuggList display-none">
+                                                    <div class="col-lg-12">
+                                                        <div class="well">
+                                                            <strong>{{hints_title}}</strong>
+                                                            <ol class="m-t-15 m-b-20">
+                                                                {% for hint in app_create_hints%}
+                                                                    <li>{{hint|raw}}</li>
+                                                                {% endfor %}
+                                                            </ol>
+                                                            <div class="progress">
+                                                              <div class="progress-bar progress-bar-striped progress-bar-lg active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                                <span class="sr-only">Keyword Searching...</span>
+                                                              </div>
+                                                            </div>
+                                                            <div class="search-finished display-none">
+                                                                <div class="alert alert-success">
+                                                                    <i class="fa fa-check"></i> {{search_finished}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% for web_name in webs %}
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading s_{{web_name|lower}}">
+                                                                <h3 class="panel-title">
+                                                                    {{web_name}}
+                                                                    <span class="pull-right count_{{web_name|lower}}">
+                                                                        
+                                                                    </span>
+                                                                </h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <ul id="r_{{web_name|lower}}" class="key-results">
+                                                                    {{no_keyword_found}}
+                                                                </ul>
+                                                            </div>
+                                                            <div class="panel-footer check_all_{{web_name|lower}}">
+                                                                <p>
+                                                                    <input type="checkbox" id="{{web_name|lower}}" data-id="{{web_name|lower}}" class="check-all" /> {{check_all}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                
+                                                <div class="col-lg-12 m-t-40">
+                                                    <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                                    <button class="btn btn-purple btn-submit" type="submit" data-type="save" >{{label_btn_save}}</button>
+                                                    <button class="btn btn-pink" type="submit" data-type="export" >{{label_btn_export}}</button>
+                                                </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                                
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

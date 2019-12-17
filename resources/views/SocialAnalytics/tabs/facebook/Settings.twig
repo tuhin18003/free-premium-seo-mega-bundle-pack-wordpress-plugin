@@ -1,0 +1,113 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes//header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes//sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes//title.twig' %} 
+                        {#page title end#}
+                            <div class="row">
+                                <div id="facebook_settings" class="col-lg-12">
+                                <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title font-13">
+                                            {{panel_subtitle}}
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        {% if notificatoin is not empty %}
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                              <strong><i class="fa fa-check"></i> </strong> {{notificatoin|raw}}
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="well">
+                                            <strong>{{hints_title}}</strong>
+                                            <ol class="m-t-15">
+                                                {% for hint in app_create_hints%}
+                                                    <li>{{hint|raw}}</li>
+                                                {% endfor %}
+                                            </ol>
+                                        </div>
+                                        <div class="form-group form-group-border">
+                                            <label class="col-sm-3 control-label">{{label_app_id}}</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" name="fb_app_id" id="fb_app_id" value="{{get_options.fb_app_id}}" placeholder ="{{placeholder_app_id}}" required=""/>
+                                                <p class="description">{{des_fb_app_id}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group {% if get_options.fb_app_id is not empty %} form-group-border {% endif %}">
+                                            <label class="col-sm-3 control-label">{{label_app_secret}}</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" name="fb_app_secret" id="fb_app_secret" value="{{get_options.fb_app_secret}}" placeholder ="{{placeholder_app_secret}}" required=""/>
+                                                <p class="description">{{des_fb_app_secret}}</p>
+                                            </div>
+                                        </div>
+                                        {% if get_options.fb_app_id is not empty %}
+                                            <div class="form-group form-group-border">
+                                                <label class="col-sm-3 control-label">{{label_app_auth}}</label> 
+                                                <div class="col-sm-9">
+                                                    <a href="{{fb_dialog_url}}" class="btn btn-info " {% if get_options.fb_app_id is not defined %} disabled {% endif %} >{{label_app_token}} </a>
+                                                    <p class="description">{{des_app_authorize}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-group-border">
+                                                <label class="col-sm-3 control-label">{{label_publish_to}}</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="fb_publish_to" id="fb_publish_to">
+                                                        <option value="0">{{label_select_default}}</option>
+                                                        {% for id, value in fb_pages %}
+                                                            <option value="{{id}}___{{value.1}}" {% if get_options.fb_publish_to.0 == id %} selected="selected" {% endif %} >{{value.0}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <p class="description">{{des_publish_to}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                            <label class="col-sm-3 control-label">{{label_cron_schedule}}</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="fb_stats_update_schedule" id="fb_stats_update_schedule">
+                                                    <option value="0">{{label_select_default}}</option>
+                                                    <option value="stop">{{label_stop_cron}}</option>
+                                                    {% for value, name in select_schedule %}
+                                                        <option value="{{value}}" {% if get_options.fb_stats_update_schedule == value %} selected="selected" {% endif %} >{{name.display}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <p class="description">{{des_cron_schedule}}</p>
+                                            </div>
+                                        </div>
+                                        {% endif %}    
+                                    </div>
+                                    <div class="panel-footer">
+                                        <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                        <input type="hidden" name="all_fb_pages" id="all_fb_pages" value="{{all_fb_pages}}"/>
+                                        <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}}</button>
+                                    </div>
+                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes//footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

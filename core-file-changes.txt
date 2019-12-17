@@ -1,0 +1,4 @@
+symfony/event-dispatcher/containerAwareEventDispatcher.php line - 95
+
+//helper function
+glob( CSMBP_BASE_DIR_PATH . "/app/Controllers/Actions/{FrontEndActions,BackEndActions}/*.php" , GLOB_BRACE )

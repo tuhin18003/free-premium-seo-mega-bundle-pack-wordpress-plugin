@@ -1,0 +1,73 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        
+                        {#main content start#}
+                        <div class="row">
+                            {% if stats.ribon_facebook is not empty %}
+                                {% for label, count in stats.ribon_facebook %}
+                                <div class="col-lg-3">
+                                    <div class="card-box">
+                                        <div class="bar-widget">
+                                            <div class="table-box">
+                                                <div class="table-detail"><div class="iconbox bg-info"><i class="fa fa-facebook"></i></div></div>
+                                                <div class="table-detail text-right"><h4 class="m-t-0 m-b-5"><b class="counter">{{count}}</b></h4><p class="text-muted m-b-0 m-t-0">{{label}}</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% if stats.ribon_google is not empty %}
+                                {% for label, count in stats.ribon_google %}
+                                <div class="col-lg-3">
+                                    <div class="card-box">
+                                        <div class="bar-widget">
+                                            <div class="table-box">
+                                                <div class="table-detail"><div class="iconbox bg-info"><i class="fa fa-google"></i></div></div>
+                                                <div class="table-detail text-right"><h4 class="m-t-0 m-b-5"><b class="counter">{{count}}</b></h4><p class="text-muted m-b-0 m-t-0">{{label}}</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>            
+                        {#country graph#}
+                      {#country graph#}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    {% if stats.no_internet is empty %}
+                                        <div id="graph_audience_overview" class="visits-by-country"></div>
+                                    {% else %}
+                                        <div class="alert alert-warning"><i class="fa fa-warning"></i> {{stats.no_internet}} </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {#country graph#}
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

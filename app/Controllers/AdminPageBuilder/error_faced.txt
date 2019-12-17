@@ -1,0 +1,2 @@
+ajaxForm - not working- 
+reason - 2 jQuery file was added - solved

@@ -1,0 +1,24 @@
+--------------DB fields value--------------
+aios_blmanager_items
+--------------------
+Items Type:-
+1. property - 1
+2. backlink - 2
+3. keyword - 3
+4. inernal_link - 4
+4. keyword - 5
+
+aios_blmanager_item_groups
+--------------------
+Groups Type:-
+1. properties - 1
+2. backlinks - 2
+3. keywords - 3
+4. inernal_links - 4
+4. keyword - 5
+
+------------------ email type------------
+1 - crawler error report
+2 - google index found report
+3 - url removed report
+4 - keyword ranking checker

@@ -1,0 +1,110 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                            <div class="row">
+                                <div id="new_group_form" class="col-lg-12">
+                                    <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title font-13">
+                                                {{add_new_group_box_title}}
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            {% include '@CsSeoMegaBundlePack/Global/includes/input_fields.twig' %} 
+                                        </div>
+                                        <div class="panel-footer">
+                                            <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                            <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_create_new_cat_btn}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="button-list btn-group" id="demo-delete-row">
+                                            <button id="btn_delete" data-action="delete_groups" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                        </div>
+                                        <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                                data-show-columns="true" data-sort-name="id"
+                                               data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                            <thead>
+                                                <tr >
+                                                    <th data-field="state" data-checkbox="true"></th>
+                                                    {% for col_name in tbl_headers %}
+                                                        <th data-field="{{ col_name }}" data-sortable="true" >{{ col_name }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in tbl_data_array %}
+                                                    <tr id="item_id_{{data.id}}" >
+                                                        <td><input  type="checkbox" value="{{data.id}}"/></td>
+                                                        <td>
+                                                            <input type="hidden" value="{{data.id}}" class="item_id"/>
+                                                            <a href="{{manage_link_url}}&group_filter={{data.id}}">{{data.name}}</a>
+                                                        </td>
+                                                        <td>
+                                                            {{data.total_keyword}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.description}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.created_on |date("M d, Y h:i:s A")}}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                {#<div class="col-lg-4">
+                                    <div class="card-box">
+                                        <h4 class="m-t-0 header-title">{{add_new_group_box_title}}</h4>
+                                        <p></p>
+                                        <form class="m-t-20" id="create_new_cat" name="create_new_cat" method="post" action="{{form_action}}">
+                                            <div class="form-group">
+                                                <label for="catname">{{label_add_new_cat_name}}</label>
+                                                <input class="form-control" name="new_cat_name"  id="new_cat_name" autocomplete="off" type="text" placeholder="{{placeholder_add_new_category}}" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="catdes">{{label_add_new_cat_des}}</label>
+                                                <input class="form-control" name="new_cat_des"  id="new_cat_des" autocomplete="off" type="text" placeholder="{{placeholder_add_new_des}}">
+                                            </div>
+                                            <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                            <div class="form-group">
+                                                <button class="btn btn-purple btn-create-blc-cat" type="submit" >{{label_create_new_cat_btn}}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>#}
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

@@ -1,0 +1,128 @@
+{# empty Twig template #}
+{% if inputs is iterable and inputs is not empty %}
+{% set input_keys = '' %}
+{% set count_total = inputs|length  %}
+{% for id,input in inputs %}
+    {#    set all input fields keys#}
+    {% set input_keys = input_keys ~ ',' ~ id %} 
+    {#get the last field#}
+    
+    {% if input.type == 'input' %}
+    <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            <input {% if input.input_width is empty %} class="form-control" {% else %} style="width:{{input.input_width}};" {% endif %}  type="{{input.input_type}}" name="{{id}}" id="{{id}}" value="{% if attribute(settings, id) is empty %}{{input.default}}{% else %}{{attribute(settings, id)}} {% endif %}" placeholder="{{input.placeholder}}" {% if input.min %} min ="{{input.min}}" {% endif %} {% if input.max %} max ="{{input.max}}" {% endif %} {% if input.required %} required="" {% endif %} {% if input.readonly %} readonly {% endif %}/>
+            <p class="description">{{input.help_text|raw}}</p>
+        </div>
+    </div>
+    {% elseif input.type == 'select' %}
+    <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            <select id="{{id}}" name="{{id}}{% if input.multiple%}[]{% endif %}" class="form-control" {% if input.multiple%} multiple="multiple" {% endif %}>
+                {#{% if settings.id == '' %}
+                    {% if input.select_default is not empty %}<option>{{input.select_default}}</option> {% endif %}
+                {% endif %}#}
+                {% for key, option in input.options %}
+                    <option value="{% if key is not empty %}{{key}}{% else %}{{option}}{% endif %}"  {% if (option in settings.type) or (attribute(settings, id) == key) or (attribute(settings, id) == option) %} selected {% endif %} > {% if input.schema is not null %} {{key}} | {{option}} {% else %} {{option}} {% endif %}</option>
+                {% endfor %}
+            </select>
+            <p class="description">{{input.help_text|raw}}</p>
+        </div>
+    </div>   
+    {% elseif input.type == 'textarea' %}
+     <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            <textarea name="{{id}}" id="{{id}}" class="form-control" placeholder="{{input.placeholder}}" {% if input.required %} required="" {% endif %} {% if input.maxlength %} maxlength ="{{input.maxlength}}" {% endif %} {% if input.readonly %} readonly {% endif %}>{% if attribute(settings, id) is not empty%}{{attribute(settings, id)}}{% else %}{{input.default}}{% endif %}</textarea>
+            <p class="description">{{input.help_text|raw}}</p>
+        </div>
+    </div>   
+        
+    {% elseif input.type == 'radio' %}
+
+    {% elseif input.type == 'checkbox' %}
+    <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            <input type="checkbox" type="{{input.input_type}}" name="{{id}}" id="{{id}}" {% if attribute(settings, id) is not empty %} checked ="checked" {% endif %} {% if input.required %} required="" {% endif %} {% if input.readonly %} readonly {% endif %} />
+            <p class="description">{{input.help_text|raw}}</p>
+        </div>
+    </div>
+    {% elseif input.type == 'multiple_checkbox' %}
+    <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            {% for chkID, checkbox in input.checkboxes %}
+                {% set input_keys = input_keys ~ ',' ~ chkID %}
+                <p>
+                <input type="checkbox" name="{{chkID}}" id="{{chkID}}" {% if attribute(settings, chkID) is not empty %} checked ="checked" {% endif %} {% if input.required %} required="" {% endif %} {% if input.readonly %} readonly {% endif %} />
+                <span class="description">{{checkbox.help_text|raw}}</span>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+        
+    {% elseif input.type == 'miscellaneous' %}
+    <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+        <label class="col-sm-3 control-label">{{input.label}}</label>
+        <div class="col-sm-9">
+            {% for miscID, option in input.options %}
+                {% set input_keys = input_keys ~ ',' ~ miscID %}
+                {% if option.concat_text is not empty %}
+                    <span class="input-concat-text">{{option.concat_text}}</span>
+                {% endif %}
+                {% if option.line_break is not empty %}
+                    <hr class="input-line-break {% if option.line_break_class is not empty %} {{option.line_break_class}} {% endif %} ">
+                {% endif %}
+                {% if option.before_text is not empty %}
+                    <span class="input-before-text">{{option.before_text}}</span>
+                {% endif %}
+                
+                {% if( option.type == 'input') %}
+                    <input type="{{option.input_type}}" style="width:{{option.input_width}};" {% if option.class is not empty %} class="{{option.class}}" {% endif %} name="{{miscID}}" id="{{miscID}}" value="{% if attribute(settings, miscID) is empty %}{{option.default}}{% else %}{{attribute(settings, miscID)}}{% endif %}" placeholder="{{option.placeholder}}" {% if option.min %} min ="{{option.min}}" {% endif %} {% if option.max %} max ="{{option.max}}" {% endif %} {% if option.required %}  required="" {% endif %} {% if option.readonly %} readonly {% endif %} />
+                {% elseif option.type == 'checkbox' %}
+                    <input type="checkbox" name="{{miscID}}" id="{{miscID}}" {% if attribute(settings, miscID) is not empty %} checked ="checked" {% endif %} {% if option.required %} required="" {% endif %} {% if option.readonly %} readonly {% endif %} />
+                {% elseif option.type == 'select' %}
+                    <select name="{{miscID}}" id="{{miscID}}" {% if option.class is not empty %} class="{{option.class}}" {% endif %}>
+                        {% for subOptVal, subOptKey in option.sub_options %}
+                            <option value="{{subOptVal}}" {% if attribute(settings, miscID) == subOptVal %} selected ="selected" {% endif %}>{{subOptKey}}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                
+                {% if option.after_text is not empty %}
+                    <span class="input-after-text">{{option.after_text}}</span>
+                {% endif %}
+            {% endfor %}
+            <p class='description'>
+                {{input.help_text|raw}}
+            </p>
+        </div>
+    </div>
+    {% elseif input.type == 'file' %}    
+        <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+            <label class="col-sm-3 control-label">{{input.label}}</label>
+            <div class="col-sm-9">
+                <input type="{{input.input_type}}" class="filestyle" name="{{id}}" id="{{id}}" data-buttonbefore="true">
+                <p class="description">{{input.help_text|raw}}</p>
+            </div>
+        </div>
+    {% elseif input.type == 'section_title' %}    
+        <div class="section-title">
+            <p class="description">
+                <i class="fa fa-edit"></i> {{input.help_text}}
+            </p>
+        </div>
+    {% elseif input.type == 'input_placeholder' %}    
+        <div class="form-group {% if loop.index != count_total or input.force_border is not empty %} form-group-border {% endif %}">
+            <label class="col-sm-3 control-label">{{input.label|raw}}</label>
+            <div class="col-sm-9">
+                <div class="{{id}}">{{input.placeholder_text|raw}}</div>
+                <p class="description">{{input.help_text|raw}}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+    <input type="hidden" class="form-control" name="inputs{% if inputs_id is not empty %}_{{inputs_id}}{% endif %}" value="{{input_keys}}" />
+{% endif %}

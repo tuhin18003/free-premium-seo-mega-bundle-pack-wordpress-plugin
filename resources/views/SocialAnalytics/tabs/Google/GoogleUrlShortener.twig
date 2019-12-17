@@ -1,0 +1,111 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        {#main content start#}
+                        <div class="row">
+                            {% if aios_goo_app_token.auth_status is empty %}
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="alert alert-warning">
+                                            <i class="fa fa-warning"></i> {{aios_goo_app_token.auth_error_msg|raw}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                            <div id="urlshortner_form" class="col-lg-12">
+                                    <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title font-13">
+                                                {{panel_title}}
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            {% if is_app_has_set is empty %}
+                                                <div class="alert alert-dismissable">
+                                                    <i class="fa fa-info"></i> {{setup_msg|raw}}
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">{{label_long_url}}</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" name="long_url" id="long_url" placeholder ="{{placeholder_long_url}}" required=""/>
+                                                    <p class="description">{{des_long_url}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                            <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}}</button>
+                                        </div>
+                                    </div>
+                                        </form>
+                                    </div>
+                                        
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                <div class="btn-group" id="demo-delete-row">
+                                    <button id="btn_delete" data-action="shorturl_delete" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                </div>
+                                   
+                                <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                        data-show-columns="true" data-sort-name="id"
+                                       data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                    <thead>
+                                        <tr >
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            {% for col_name in tbl_headers %}
+                                                <th data-field="{{ col_name }}" data-sortable="true">{{ col_name }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in tbl_rows %}
+                                            <tr id="item_id_{{row.id}}" >
+                                                <td><input  type="checkbox" value="{{row.id}}"/></td>
+                                                <td>
+                                                    <input type="hidden" value="{{row.id}}" class="item_id"/>
+                                                    <a href="{{row.short_url}}" target="_blank">{{row.short_url}}</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{row.long_url}}" target="_blank">{{row.long_url}}</a>
+                                                </td>
+                                                <td>
+                                                    {{row.analytics}}
+                                                </td>
+                                                <td>
+                                                    {{row.created_on|date("M d, Y h:i:s A")}}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

@@ -1,0 +1,26 @@
+{# empty Twig template #}
+<div class="left side-menu">
+    <div class="sidebar-inner slimscrollleft">
+        <div id="sidebar-menu">
+            <ul>
+                {% for menu_name, menu_pro in CommonText.menu %}
+                    {% if menu_pro.0 == 'has_sub' %}
+                        {#{{ dump(menu_pro)}}#}
+                        <li class="has_sub">
+                            <a class="waves-effect {% if menu_pro[CommonText.current_tab] is defined %} active {% endif %}"><i class="fa fa-{{menu_pro.1}}"></i> <span>{{menu_name}}</span> <i class="fa fa-caret-{% if menu_pro[CommonText.current_tab] is defined %}up{% else %}down{% endif %} pull-right icon-right"></i> </a>
+                            <ul class="list-unstyled" {% if menu_pro[CommonText.current_tab] is defined %} style ="display:block;" {% endif %}>
+                                {% for tabSlug,subMenuAsset in menu_pro|slice(2) %}
+                                    <li class="waves-effect {% if CommonText.current_tab == tabSlug %} active {% endif %}"><a href="{{CommonText.base_url}}{% if tabSlug is empty %} {% else %}&tab={{ tabSlug }} {% endif %}" >{{subMenuAsset.1}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{CommonText.base_url}}{% if menu_pro.1 is empty %} {% else %}&tab={{ menu_pro.1 }} {% endif %}" class="waves-effect {% if CommonText.current_tab == menu_pro.1 %} active {% else %}  {% if CommonText.current_tab == menu_name %} active {% endif %} {% endif %}"><i class="fa fa-{{ menu_pro.0 }}"></i><span> {{ menu_name }}</span></a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

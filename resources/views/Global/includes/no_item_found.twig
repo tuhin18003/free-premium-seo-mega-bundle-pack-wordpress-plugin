@@ -1,0 +1,12 @@
+{# empty Twig template #}
+{% if tbl_rows is empty %}
+<div class="alert alert-warning">
+    <p>
+        <strong><i class="fa fa-warning"></i> {{CommonText.notice_no_item.type|raw}}</strong>
+        <span class="description">
+            {{CommonText.notice_no_item.msg|raw}}
+        </span>
+    </p>
+</div>
+{% endif %}
+        

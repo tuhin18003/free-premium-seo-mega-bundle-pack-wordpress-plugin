@@ -1,0 +1,148 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                                <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                <input type="hidden" id="base_url" value="{{base_url}}"/> 
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        {#<h4 class="m-t-0 header-title"><b>Custom Toolbar</b></h4>
+                                        <p class="text-muted font-13">Example of Custom Toolbar (Your text goes here).</p>#}
+                                         {% if filter_title != '' %}
+                                        <div class="p-10 bg-inverse m-b-20">
+                                            <h4 class="header-title text-white"><b>
+                                                    {{filter_title|raw}}
+                                                </b></h4>
+                                            <p class="text-muted font-13">
+                                                {{filter_subtitle|raw}}
+                                            </p>
+                                        </div>
+                                        {% endif %}
+                                        <div class="button-list btn-group" id="demo-delete-row">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-white dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">{{label_filter_btn}} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    {% for gorup in groups %}
+                                                        <li><a href="{{base_url}}&group_filter={{gorup.id}}">{{gorup.group_name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-warning dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">{{actn_btns}} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" id="update_now" data-action="CSbacklinkAutoUpdateInstantly">{{actn_btn_update}}</a></li>
+                                                    <li><a href="#" id="set_auto_update" data-action="CSsetAutoUpdateBacklink">{{actn_btn_set_auto_update_backlink}}</a></li>
+                                                    <li><a href="#" id="remove_auto_update" data-action="CSsetAutoUpdateBacklink">{{actn_btn_remove_auto_update_backlink}}</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-purple dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">{{actn_btn_compare}} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+{#                                                    <li><a href="#" id="btn_compare">{{actn_btn_compare}}</a></li>#}
+                                                    <li><a href="#" id="btn_compare_date">{{actn_btn_compare_by_date}}</a></li>
+                                                </ul>
+                                            </div>
+                                            {#<button id="btn_compare" class="btn btn-purple" disabled="disabled"><i class="fa fa-line-chart m-r-5"></i>{{actn_btn_compare}}</button>
+                                            <button id="btn_compare_date" class="btn btn-inverse" disabled="disabled"><i class="fa fa-calendar m-r-5"></i>{{actn_btn_compare_by_date}}</button>#}
+                                            <button id="btn_delete" data-action ="CSdeleteBacklink" data-type="delete_backlink" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                        </div>
+                                        
+                                        <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                                data-show-columns="true" data-sort-name="id"
+                                               data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                            <thead>
+                                                <tr >
+                                                    <th data-field="state" data-checkbox="true"></th>
+                                                    {% for col_name in tbl_headers %}
+                                                        <th data-field="{{ col_name }}" data-sortable="true" >{{ col_name }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in tbl_data_array %}
+                                                    <tr id="item_id_{{data.10}}">
+                                                        <td><input  type="checkbox" value="{{data.10}}"/></td>
+                                                        <td> <a href="{{data.16}}" target="_blank">{{data.16}}</a>
+                                                            <input type="hidden" value="{{data.10}}" class="item_id"/>
+                                                            <input type="hidden" value="{{data.0}}" class="item_url"/>
+                                                            {% if data.13 == 1 %}
+                                                                <br><span class="label label-table label-pink" data-toggle="tooltip" data-placement="top" title="{{auto_update_backlink}}">
+                                                                    <i class="fa fa-spin fa-spinner"></i> 
+                                                                </span>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td><a href="{{data.0}}" target="_blank">{{data.0}}</a></td>
+                                                        <td>
+                                                            {{data.17}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.15 | raw}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span data-label="{{data.2 * 10}}" data-toggle="tooltip" data-title="{{data.2}} {{out_of_10}}" class="radial-bar radial-bar-{{data.2 * 10 |round}} radial-bar-xs radial-bar-info no-margin"></span>
+                                                        </td>
+                                                        {#<td>
+                                                            <div class="progress progress-md m-b-5" data-toggle="tooltip" data-placement="top" title="{{domain_auth}} {{data.4}} {{out_of_100}}">
+                                                                <div class="progress-bar progress-bar-custom progress-bar-striped active" role="progressbar" aria-valuenow="{{data.4}}" aria-valuemin="0" aria-valuemax="100" style="width: {{data.4}}%">
+                                                                    {{data.4}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="progress progress-md m-b-5" data-toggle="tooltip" data-placement="top" title="{{page_auth}} {{data.5}} {{out_of_100}}">
+                                                                <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="{{data.5}}" aria-valuemin="0" aria-valuemax="100" style="width: {{data.5}}%">
+                                                                    {{data.5}}
+                                                                </div>
+                                                            </div>
+                                                        </td>#}
+                                                        {#<td>
+                                                            <div class="m-b-5">
+                                                                <span class="label label-default"><strong>{{data.6}}</strong> (global)</span>
+                                                            </div>
+                                                            {% if data.8 != 0 %}
+                                                                <div class="">
+                                                                    <span class="label label-primary"><strong>{{data.8}}</strong> ({{data.7}})</span>
+                                                                </div>
+                                                            {% endif %}
+                                                        </td>#}
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                         {% if filter_title != '' %}
+                                            <br><br>
+                                            <a href="{{base_url}}" class="btn btn-primary" ><i class="fa fa-angle-double-left"></i> {{label_back_to_btn}}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

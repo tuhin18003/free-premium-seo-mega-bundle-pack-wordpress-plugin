@@ -1,0 +1,220 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        <div class="row">
+                        <div id="google_settings" class="col-lg-12">
+                        <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title font-13">
+                                    {{panel_subtitle}}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if notificatoin is not empty %}
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <strong><i class="fa fa-check"></i> </strong> {{notificatoin|raw}}
+                                    </div>
+                                {% endif %}
+                                {% include '@CsSeoMegaBundlePack/Global/includes/hints.twig' %} 
+                                
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_app_id}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="app_id" id="app_id" value="{{get_options.app_id}}" placeholder ="{{placeholder_app_id}}" required=""/>
+                                        <p class="description">{{des_app_id}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_app_secret}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="app_secret" id="app_secret" value="{{get_options.app_secret}}" placeholder ="{{placeholder_app_secret}}" required=""/>
+                                        <p class="description">{{des_app_secret}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group {% if get_options.app_id is not empty %} form-group-border {% endif %}">
+                                    <label class="col-sm-3 control-label">{{label_app_redirect_url}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="{{app_redirect_url}}" readonly />
+                                        <p class="description">{{des_app_redirect_url}}</p>
+                                    </div>
+                                </div>
+                                {% if get_options.app_id is not empty %}
+                                    <div class="form-group form-group-border">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <a href="{{dialog_url}}" class="btn btn-info " {% if get_options.app_id is not defined %} disabled {% endif %} >{{label_app_authorize}} </a>
+                                            <p class="description">{{des_app_authorize}}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group form-group-border">
+                                        <label class="col-sm-3 control-label">{{label_profile_id}}</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="profile_id" id="profile_id">
+                                                <option value="0">{{label_select_default}}</option>
+                                                {% if profiles is not null %}
+                                                    {% for id, value in profiles %}
+                                                        <option value="{{value.webPropertyId}}" {% if get_options.profile_id == value.webPropertyId %} selected="selected" {% endif %} >{{value.websiteUrl}}({{value.name}})</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </select>
+                                            <p class="description">{{des_profile_id}}</p>
+                                        </div>
+                                    </div>
+                                <div class="section-title">
+                                    <p class="description"><i class="fa fa-edit"></i> {{label_section_title}}</p>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_annon_ip}}</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="annon_ip" id="annon_ip">
+                                            {% for id, value in label_annon_ip_options %}
+                                                <option value="{{value}}" {% if get_options.annon_ip == value %} selected="selected" {% endif %}>{{value}}</option>
+                                            {% endfor %}
+                                        </select>        
+                                        <p class="description">{{des_annon_ip}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_google_analytics_id}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="analytics_id_for_track" id="analytics_id_for_track" value="{{get_options.analytics_id_for_track}}" placeholder ="{{placeholder_google_analytics_id}}" />
+                                        <p class="description">{{des_google_analytics_id}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_auto_add_tracking_code}}</label>
+                                    <div class="col-sm-9">
+                                        <div class="">
+                                            <input id="checkbox12" type="checkbox" name="auto_add_tracking_code" {% if get_options.auto_add_tracking_code == 'on'  %} checked {% endif %} >
+                                        </div>
+                                        <p class="description">{{des_auto_add_tracking_code}}</p>
+                                    </div>
+                                </div>
+                            {#webmaster tool settings#}
+                                <div class="section-title">
+                                    <p class="description"><i class="fa fa-edit"></i> {{label_webmaster_section_title}}</p>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_cron_schedule}}</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="crawler_lookup_schedule" id="crawler_lookup_schedule">
+                                            <option value="0">{{label_select_default}}</option>
+                                            <option value="stop">{{label_stop_cron}}</option>
+                                            {% for value, name in select_schedule %}
+                                                <option value="{{value}}" {% if get_options.crawler_lookup_schedule == value %} selected="selected" {% endif %} >{{name.display}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <p class="description">{{des_cron_schedule}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_email_send}}</label>
+                                    <div class="col-sm-9">
+                                        <input id="checkbox12" type="checkbox" name="send_report" {% if get_options.send_report == 'on'  %} checked {% endif %} >
+                                        <p class="description">{{des_email_send}}</p>
+                                    </div>
+                                </div>    
+                            {#webmaster tool settings#}
+                            
+                            {#custom serarch settings#}
+                                <div class="section-title">
+                                    <p class="description"><i class="fa fa-edit"></i> {{label_cse_section_title}}</p>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_google_country}}</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="google_country" id="google_country">
+                                            {% for domain in google_domains %}
+                                                <option value="{{domain}}" {% if get_options.google_country == domain %} selected="selected" {% endif %} >{% if domain == 'www.google.com' %}{{label_all_location}} {% else %}  {{domain}} {% endif %}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <p class="description">{{des_google_country}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_custom_search_id}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="custom_search_id" id="custom_search_id" value="{{get_options.custom_search_id}}" placeholder ="{{placeholder_custom_search_id}}" />
+                                        <p class="description">{{des_custom_search_id|raw}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_index_cron_schedule}}</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="index_cron_schedule" id="index_cron_schedule">
+                                            <option value="0">{{label_select_default}}</option>
+                                            <option value="stop">{{label_stop_cron}}</option>
+                                            {% for value, name in select_schedule %}
+                                                <option value="{{value}}" {% if get_options.index_cron_schedule == value %} selected="selected" {% endif %} >{{name.display}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <p class="description">{{des_index_cron_schedule}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-border">
+                                    <label class="col-sm-3 control-label">{{label_checking_limit}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="number" maxlength="1000" name="checking_limit" id="checking_limit" value="{{get_options.checking_limit}}" placeholder ="{{placeholder_checking_limit}}" />
+                                        <p class="description">{{des_checking_limit|raw}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label">{{label_email_send}}</label>
+                                    <div class="col-sm-9">
+                                        <input id="checkbox12" type="checkbox" name="cse_email_report" {% if get_options.cse_email_report == 'on'  %} checked {% endif %} >
+                                        <p class="description">{{des_cse_email_report}}</p>
+                                    </div>
+                                </div>
+                                <div class="section-title">
+                                    <p class="description"><i class="fa fa-edit"></i> {{label_local_seo_section_title}}</p>
+                                </div>    
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{label_browser_key}}</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="browser_key" id="browser_key" value="{{get_options.browser_key}}" placeholder ="{{placeholder_browser_key}}" />
+                                        <p class="description">{{des_browser_key|raw}}</p>
+                                    </div>
+                                </div>
+                            {#custom serarch settings#}
+                            
+                                {% endif %}
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}}</button>
+                            </div>
+                        </div>
+                            </form>
+                        </div>
+                        </div>
+                        
+                          
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

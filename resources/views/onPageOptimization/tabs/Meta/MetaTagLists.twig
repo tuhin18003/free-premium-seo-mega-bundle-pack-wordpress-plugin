@@ -1,0 +1,94 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/Global/includes/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        {% include '@CsSeoMegaBundlePack/Global/includes/title.twig' %} 
+                        {#page title end#}
+                        <div class="row">
+                        <div id="title_metas_settings" class="col-lg-12">
+                        <form id="InternalAddNewRule" action="{{form_action}}" role='form' method='post' class="form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title font-13">
+                                    {{panel_subtitle}}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="well">
+                                    <strong>{{hints_title}}</strong>
+                                    <ol class="m-t-15">
+                                        {% for hint in app_create_hints%}
+                                            <li>{{hint|raw}}</li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                                <ul class="nav nav-tabs navtab-bg nav-justified">
+                                    {% for tab in tabs %}
+                                    <li class="{% if loop.index == 1 %}active{% endif %}">
+                                        <a href="#section{{loop.index}}" data-toggle="tab" aria-expanded="true">
+                                            <span class="visible-xs"><i class="fa fa-home"></i></span> 
+                                            <span class="hidden-xs">{{tab}}</span>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="tab-content">
+                                    {% for id, assets in tab_assets %}
+                                        <div id="section{{loop.index}}" class="tab-pane {% if loop.index == 1 %}active{% endif %}">
+                                            {% set first_col = (assets|length / 2) | round %}
+                                            <div class="row">
+                                                {% for i in 1..2 %}
+                                                    {% if i == 1 %}
+                                                        {% set AssetStart = assets[0:first_col] %}
+                                                    {% elseif i == 2 %}
+                                                        {% set AssetStart = assets[first_col:] %}
+                                                    {% endif %}
+                                                    <div class="col-lg-6">
+                                                        <ul class="list-group">
+                                                            {% for asset in AssetStart %}
+                                                                <li class="list-group-item">
+                                                                    <p class="description">
+                                                                        <input type="checkbox" name="metas[{{asset.0}}][{{asset.1}}][]" value="{{asset.2}}" {% if asset.2 in attribute(attribute( options, asset.0), asset.1) %} checked ="checked" {% endif %} class="m-r-10"/>
+                                                                        <span class="p-r-20">{{asset.0}}</span> <span class="p-r-20">{{asset.1}}</span> <strong>{{asset.2}}</strong>
+                                                                    </p> 
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    
+                                </div>        
+                                {#include input fields#}
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" name="_wpnonce" id="_wpnonce" value="{{nonce_field}}"/>
+                                <button class="btn btn-purple waves-effect waves-light btn-submit" type="submit">{{label_submit_btn}}</button>
+                            </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/Global/includes/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

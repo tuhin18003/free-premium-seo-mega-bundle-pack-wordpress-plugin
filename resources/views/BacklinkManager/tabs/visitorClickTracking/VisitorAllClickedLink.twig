@@ -1,0 +1,105 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                                <input type="hidden" id="loading_gif" value="{{loading_gif}}"/> 
+                                <input type="hidden" id="base_url" value="{{base_url}}"/> 
+                                <input type="hidden" id="aios_nonce" value="{{nonce_field}}"/> 
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="p-10 bg-inverse m-b-20 border-radius">
+                                            <div class="row">
+                                                <div class="col-lg-5">
+                                                    <p class="font-13 text-white">
+                                                        <b>{{label_log_found}}:</b> {{log_count}}
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="btn-group vertical-middle pull-right" data-toggle="buttons">
+                                                        <div id="reportrange" class="form-control">
+                                                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                                            <span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                    
+                                        <div class="btn-group" id="demo-delete-row">
+                                            <button id="btn_delete" data-action ="delete_vct" data-type="visitor_click_link_log" class="btn btn-danger" disabled="disabled"><i class="fa fa-times m-r-5"></i>{{actn_delete_btn}}</button>
+                                        </div>
+                                        <table id="demo-custom-toolbar" data-toggle="table" data-toolbar="#demo-delete-row" data-search="true" 
+                                                data-show-columns="true" data-sort-name="id"
+                                               data-page-list="[10, 20, 30, 50]" data-page-size="10" data-pagination="true" data-show-pagination-switch="true" class="table-bordered">
+                                            <thead>
+                                                <tr >
+                                                    <th data-field="state" data-checkbox="true"></th>
+                                                    {% for col_name in tbl_headers %}
+                                                        <th data-field="{{ col_name }}" data-sortable="true" >{{ col_name }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in tbl_data_array %}
+                                                    <tr id="item_id_{{data.id|e}}">
+                                                        <td><input  type="checkbox" value="{{data.id|e}}"/></td>
+                                                        <td>
+                                                            <input type="hidden" value="{{data.id|e}}" class="item_id"/>
+                                                                {{ data.url|e  }}
+                                                        </td>
+                                                        <td>
+                                                            {{data.keyword}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.referrer}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.visitor_agent}} <br>
+                                                            <b>{{label_ip}}:</b> {{data.visitor_ip}}
+                                                        </td>
+                                                        <td>
+                                                            {{data.visited_on |date("M d, Y h:i A")}}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                        </table>
+                                        {% if filter_title != '' %}
+                                            <br><br>
+                                            <a href="{{current_url}}" class="btn btn-primary" ><i class="fa fa-angle-double-left"></i> {{label_back_to_btn}}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

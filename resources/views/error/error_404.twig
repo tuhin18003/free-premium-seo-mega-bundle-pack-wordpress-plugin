@@ -1,0 +1,53 @@
+{#page start#}
+<div class="all-in-one-seo-content">
+    <div class="fixed-left">
+        {#wrapper start#}
+        <div id="wrapper">
+            {#include page header#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/header.twig' %} 
+            {#include page sidebar#}
+            {% include '@CsSeoMegaBundlePack/BacklinkManager/common/sidebar.twig' %} 
+            {#content page start#}
+            <div class="content-page">
+                {#content div start#}
+                <div class="content">
+                    {#container div start#}
+                    <div class="container">
+                        {#page title start#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">{{page_title}}</h4>
+                                <p class="text-muted page-title-alt">{{page_subtitle}}</p>
+                            </div>
+                        </div>
+                        {#page title end#}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-box">
+                                        <div class="ex-page-content text-center">
+                                            <div class="text-error">
+                                                <span class="text-primary">4</span>
+                                                <i class="ti-face-sad text-pink"></i>
+                                                <span class="text-info">4</span>
+                                            </div>
+                                            <h2>{{oops}}</h2>
+                                            <br>
+                                            <p class="text-muted">{{not_found_msg}}</p>
+                                            <p class="text-muted">{{dir_msg}}</p>
+                                            <br>
+                                            <a href="{{back_btn_href}}" class="m-t-20 btn btn-default waves-effect waves-light"><i class="fa fa-angle-double-left"></i> {{back_btn_label}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {#main content start#}
+                        
+                        {#main content end#}
+                    </div> {#container end#}
+                </div> {#content end#}
+                {#include footer#}
+                {% include '@CsSeoMegaBundlePack/BacklinkManager/common/footer.twig' %} 
+            </div> {#page content end#}
+        </div> {#wrapper end#}
+    </div>
+</div> {#page end#}

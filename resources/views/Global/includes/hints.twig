@@ -1,0 +1,11 @@
+{# Hints Twig template #}
+{% if hints_title is not empty %}
+<div class="well">
+    <strong>{{hints_title}}</strong>
+    <ol class="m-t-15">
+        {% for hint in app_create_hints%}
+            <li>{{hint|raw}}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
