@@ -76,7 +76,6 @@ A premium wordpress free plugins to do your all necessary automated SEO.
             <li>event details</li>
         </ul>
     </li>
-
     <li>
         <strong>Compatibility</strong>
         <ul class="nomargin">
